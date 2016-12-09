@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/mendybarouk/AndroidStudioProjects/HackerU/Notes/FloatingActionButtonBasic/Application/build/intermediates/res/merged/debug/drawable-xxhdpi/ic_launcher.png",
+        "source": "/Users/mendybarouk/AndroidStudioProjects/HackerU/Notes/FloatingActionButtonBasic/Application/src/main/res/drawable-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mendybarouk/AndroidStudioProjects/HackerU/Notes/FloatingActionButtonBasic/Application/build/intermediates/res/merged/debug/drawable-xxhdpi/ic_tick.png",
+        "source": "/Users/mendybarouk/AndroidStudioProjects/HackerU/Notes/FloatingActionButtonBasic/Application/src/main/res/drawable-xxhdpi/ic_tick.png"
+    },
+    {
+        "merged": "/Users/mendybarouk/AndroidStudioProjects/HackerU/Notes/FloatingActionButtonBasic/Application/build/intermediates/res/merged/debug/drawable-xxhdpi/ic_add.png",
+        "source": "/Users/mendybarouk/AndroidStudioProjects/HackerU/Notes/FloatingActionButtonBasic/Application/src/main/res/drawable-xxhdpi/ic_add.png"
+    }
+]
