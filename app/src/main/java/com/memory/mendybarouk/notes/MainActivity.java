@@ -64,11 +64,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (!data.getBooleanExtra(ADD, false)) {
                     int i = data.getIntExtra(I, -1);
                     if (i != -1) {
-                        notes.set(i, note);
+                        notes.remove(i);
+                        notes.add(0, note);
                         noteAdapter.notifyDataSetChanged();
                     }
                 }else {
-                    noteAdapter.add(note);
+                    notes.add(0, note);
                     mListView.setAdapter(noteAdapter);
                 }
             }
