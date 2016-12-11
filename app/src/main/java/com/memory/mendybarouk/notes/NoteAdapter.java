@@ -1,7 +1,10 @@
 package com.memory.mendybarouk.notes;
 
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         super(context, 0, notes);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -30,6 +34,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             viewHolder = new NoteViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.data = (TextView) convertView.findViewById(R.id.data);
+            viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             convertView.setTag(viewHolder);
         }
 
@@ -42,6 +47,8 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         }
         viewHolder.data.setText(data);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        viewHolder.time.setText(dateFormat.format(note.getTime().getTime()));
 
         //nous renvoyons notre vue à l'adapter, afin qu'il l'affiche
         //et qu'il puisse la mettre à recycler lorsqu'elle sera sortie de l'écran
@@ -51,5 +58,6 @@ public class NoteAdapter extends ArrayAdapter<Note> {
     private class NoteViewHolder{
         public TextView title;
         public TextView data;
+        public TextView time;
     }
 }

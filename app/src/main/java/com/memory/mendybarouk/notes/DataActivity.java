@@ -2,6 +2,8 @@ package com.memory.mendybarouk.notes;
 
 import android.content.Intent;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -49,6 +51,7 @@ public class DataActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void save() {
         String title = editTextTitle.getText().toString().trim();
         String data = editTextData.getText().toString().trim();
@@ -74,15 +77,16 @@ public class DataActivity extends AppCompatActivity {
         finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addNote(String title, String data, Intent intent) {
         note = new Note(title, data);
         intent.putExtra(MainActivity.ADD, true);
         intent.putExtra(MainActivity.NOTE, note);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void saveModification(String title, String data, Intent intent) {
-        note.setTitle(title);
-        note.setData(data);
+        note = new Note(title, data);
         intent.putExtra(MainActivity.ADD, false);
         intent.putExtra(MainActivity.NOTE, note);
         intent.putExtra(MainActivity.I, i);
