@@ -35,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/activity_data_data"
-        android:inputType="textImeMultiLine"
         android:cursorVisible="true"
         android:background="#FFFFE0"
         android:gravity="top"
