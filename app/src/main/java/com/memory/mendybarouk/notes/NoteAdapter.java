@@ -29,12 +29,19 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         if(viewHolder == null){
             viewHolder = new NoteViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
+            viewHolder.data = (TextView) convertView.findViewById(R.id.data);
             convertView.setTag(viewHolder);
         }
 
-        //getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
+        //getItem(position) va récupérer l'item [position] de la List<Notes> notes
         Note note = getItem(position);
         viewHolder.title.setText(note.getTitle());
+        String data = note.getData();
+        if (data.length() > 10){
+            data = data.substring(0, 10) + "...";
+        }
+        viewHolder.data.setText(data);
+
 
         //nous renvoyons notre vue à l'adapter, afin qu'il l'affiche
         //et qu'il puisse la mettre à recycler lorsqu'elle sera sortie de l'écran
@@ -43,5 +50,6 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
     private class NoteViewHolder{
         public TextView title;
+        public TextView data;
     }
 }
