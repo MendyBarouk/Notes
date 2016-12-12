@@ -23,8 +23,7 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data);
-
+        setContentView(R.layout.activity_editor);
 
 
         intent = getIntent();
@@ -34,7 +33,7 @@ public class EditorActivity extends AppCompatActivity {
         editTextTitle = (EditText) findViewById(R.id.activity_data_title);
         editTextData = (EditText) findViewById(R.id.activity_data_data);
 
-        if (!fAdd){
+        if (!fAdd) {
             modifyNote();
         }
 
@@ -61,7 +60,7 @@ public class EditorActivity extends AppCompatActivity {
             if (!fAdd) {
                 saveModification(title, data, intent);
 
-            } else if (fAdd){
+            } else if (fAdd) {
                 addNote(title, data, intent);
             }
             setResult(RESULT_OK, intent);
@@ -104,10 +103,10 @@ public class EditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_delete:
                 delete();
-                return  true;
+                return true;
             case R.id.action_save:
                 save();
                 return true;

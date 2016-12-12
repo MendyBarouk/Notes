@@ -26,11 +26,11 @@ public class NoteAdapter extends ArrayAdapter<Note> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_note,parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_note, parent, false);
         }
         NoteViewHolder viewHolder = (NoteViewHolder) convertView.getTag();
-        if(viewHolder == null){
+        if (viewHolder == null) {
             viewHolder = new NoteViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.data = (TextView) convertView.findViewById(R.id.data);
@@ -42,7 +42,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         Note note = getItem(position);
         viewHolder.title.setText(note.getTitle());
         String data = note.getData();
-        if (data.length() > 10){
+        if (data.length() > 10) {
             data = data.substring(0, 10) + "...";
         }
         viewHolder.data.setText(data);
@@ -55,7 +55,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         return convertView;
     }
 
-    private class NoteViewHolder{
+    private class NoteViewHolder {
         public TextView title;
         public TextView data;
         public TextView time;

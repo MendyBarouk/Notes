@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static final String NOTE = "com.memory.mendybarouk.notes.NOTE";
     public static final String I = "com.memory.mendybarouk.notes.I";
     public static final String ADD = "com.memory.mendybarouk.notes.ADD";
-    public static final int BACK_FROM_DATA_ACTIVITY = 0;
+    public static final int BACK_FROM_EDITOR_ACTIVITY = 0;
     ListView mListView;
     List<Note> notes = new ArrayList<Note>();
     NoteAdapter noteAdapter;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        noteAdapter = new NoteAdapter(this,notes);
+        noteAdapter = new NoteAdapter(this, notes);
 
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
@@ -48,21 +48,34 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent intent = new Intent(this, EditorActivity.class);
-        Note note = (Note) adapterView.getItemAtPosition(i);
+        goToEditorActivity(i, false);
 
-        intent.putExtra(ADD,false);
-        intent.putExtra(NOTE,note);
-        intent.putExtra(I,i);
-
-        startActivityForResult(intent,BACK_FROM_DATA_ACTIVITY);
     }
 
     @Override
+    public void onClick(View view) {
+        goToEditorActivity(-1, true);
+    }
+
+    private void goToEditorActivity(int i, boolean add) {
+        Intent intent = new Intent(this, EditorActivity.class);
+        intent.putExtra(ADD, add);
+
+        if (!add) {
+            Note note = (Note) noteAdapter.getItem(i);
+            intent.putExtra(NOTE, note);
+            intent.putExtra(I, i);
+        }
+
+        startActivityForResult(intent, BACK_FROM_EDITOR_ACTIVITY);
+    }
+
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == BACK_FROM_DATA_ACTIVITY){
-            if (resultCode == RESULT_OK){
-                if (data.getBooleanExtra(EditorActivity.DELETE, false)){
+        if (requestCode == BACK_FROM_EDITOR_ACTIVITY) {
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra(EditorActivity.DELETE, false)) {
                     notes.remove(data.getIntExtra(I, -1));
                     mListView.setAdapter(noteAdapter);
                     return;
@@ -75,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         notes.add(0, note);
                         noteAdapter.notifyDataSetChanged();
                     }
-                }else {
+                } else {
                     notes.add(0, note);
                     mListView.setAdapter(noteAdapter);
                 }
@@ -83,14 +96,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(this, EditorActivity.class);
-        intent.putExtra(ADD, true);
-        startActivityForResult(intent, BACK_FROM_DATA_ACTIVITY);
-    }
 
-    private void displayListeNotes(){
+    private void displayListeNotes() {
         NoteAdapter adapter = new NoteAdapter(MainActivity.this, notes);
         mListView.setAdapter(adapter);
     }

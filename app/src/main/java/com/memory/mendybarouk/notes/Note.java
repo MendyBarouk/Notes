@@ -3,6 +3,7 @@ package com.memory.mendybarouk.notes;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+
 import java.io.Serializable;
 
 /**
@@ -15,7 +16,7 @@ public class Note implements Serializable {
     Calendar time;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Note(String title, String data){
+    public Note(String title, String data) {
         this.title = title;
         this.data = data;
         time = Calendar.getInstance();
