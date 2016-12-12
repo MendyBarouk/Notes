@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-public class DataActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity {
 
     public static final String DELETE = "com.memory.mendybarouk.notes.DELETE";
     int i;

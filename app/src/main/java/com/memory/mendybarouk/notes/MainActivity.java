@@ -1,6 +1,8 @@
 package com.memory.mendybarouk.notes;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     List<Note> notes = new ArrayList<Note>();
     NoteAdapter noteAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         FloatingActionButton addButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         addButton.setOnClickListener(this);
 
+        for (int i = 0; i < 100; i++) {
+            notes.add(new Note("title " + i, "data " + i));
+        }
+
         displayListeNotes();
 
     }
@@ -41,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent intent = new Intent(this, DataActivity.class);
+        Intent intent = new Intent(this, EditorActivity.class);
         Note note = (Note) adapterView.getItemAtPosition(i);
 
         intent.putExtra(ADD,false);
@@ -55,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BACK_FROM_DATA_ACTIVITY){
             if (resultCode == RESULT_OK){
-                if (data.getBooleanExtra(DataActivity.DELETE, false)){
+                if (data.getBooleanExtra(EditorActivity.DELETE, false)){
                     notes.remove(data.getIntExtra(I, -1));
                     mListView.setAdapter(noteAdapter);
                     return;
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(this, DataActivity.class);
+        Intent intent = new Intent(this, EditorActivity.class);
         intent.putExtra(ADD, true);
         startActivityForResult(intent, BACK_FROM_DATA_ACTIVITY);
     }
