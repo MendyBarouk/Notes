@@ -28,7 +28,6 @@ public class NoteAdapter extends ArrayAdapter<Note> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //jefdsa
         NoteViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_note, parent, false);
